@@ -3,15 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quanvong/job-application-API/issues"
+  },
+  "homepage": "https://github.com/quanvong/job-application-API#readme",
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "joi": "^17.13.3",
     "mysql2": "^3.14.1"
