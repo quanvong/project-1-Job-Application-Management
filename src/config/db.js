@@ -8,15 +8,6 @@ const dbConfig = {
   database: process.env.DB_NAME || 'job_application_management',
 };
 
-async function connectDB() {
-  try {
-    const connection = await mysql.createConnection(dbConfig);
-    console.log('Kết nối MySQL thành công!');
-    return connection;
-  } catch (error) {
-    console.error('Lỗi kết nối MySQL:', error.message);
-    throw error;
-  }
-}
+const pool = mysql.createPool(dbConfig);
 
-module.exports = connectDB;
+module.exports = pool;
