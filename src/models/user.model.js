@@ -1,28 +1,36 @@
-const bcrypt = require('bcrypt');
-const db = require('../config/db.js');
+const db = require('../config/database.js');
 
-const createUser = async (email, password, role) => {
-    try {
-        // Mã hóa mật khẩu
-        const hashedPassword = await bcrypt.hash(password, 10);
+exports.getAllUser = async () => {
+    const [rows] = await db.execute('SELECT * FROM users');
+    return rows;
+}
 
-        // Thực hiện truy vấn để thêm người dùng mới vào bảng users
-        const [result] = await db.query(
-            'INSERT INTO users (email, password, role) VALUES (?, ?, ?)',
-            [email, hashedPassword, role || 'user']
-        );
+exports.getUserById = async (id) => {
+    const [rows] = await db.execute('SELECT * FROM users WHERE id = ?', [id]);
+    return rows[0];
+}
 
-        // Trả về thông tin người dùng mới được tạo
-        return {
-            id: result.insertId,
-            email: email,
-            role: role || 'user',
-            createdAt: new Date()
-        };
-    } catch (error) {
-        console.error('Lỗi tạo user:', error);
-        throw error;
-    }
-};
+exports.deleteUser = async (id) => {
+    const [result] = await db.execute('DELETE FROM users WHERE id = ?', [id]);
+    return result.affectedRows;
+}
 
-module.exports = { createUser };
+exports.createUser = async (data) => {
+    const {username, email, password, role, status, email_verified} = data;
+
+    const [result] = await db.execute(
+        'INSERT INTO users(username, email, password, role, status, email_verified) VALUES(?,?,?,?,?,?)',
+        [username, email, password, role, status, email_verified]
+    );
+    return result.insertId;
+}
+
+exports.updateUser = async (id, data) => {
+    const {username, email, password, role, status, email_verified} = data;
+
+    const [result] = await db.execute(
+        'UPDATE users SET username = ?, email = ?, password = ?, role = ?, status =?, email_verified = ? WHERE id = ?',
+        [username, email, password, role, status, email_verified, id]
+    );
+    return result.affectedRows;
+}

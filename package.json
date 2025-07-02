@@ -3,27 +3,28 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/quanvong/job-application-management.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/quanvong/job-application-API/issues"
+    "url": "https://github.com/quanvong/job-application-management/issues"
   },
-  "homepage": "https://github.com/quanvong/job-application-API#readme",
+  "homepage": "https://github.com/quanvong/job-application-management#readme",
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.0.1",
     "express": "^5.1.0",
-    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
